@@ -2,13 +2,17 @@ _schema-version: '3.1'
 ID: devops
 version: 1.0.0
 description: "A simple CAP project."
+
 parameters:
   enable-parallel-deployments: true
+
 build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npx cds build --production
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
+
 modules:
   - name: devops-srv
     type: nodejs
