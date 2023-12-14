@@ -1,5 +1,5 @@
 _schema-version: '3.1'
-ID: devops2
+ID: devops
 version: 1.0.0
 description: "A simple CAP project."
 parameters:
@@ -10,7 +10,7 @@ build-parameters:
       commands:
         - npx cds build --production
 modules:
-  - name: devops2-srv
+  - name: devops-srv
     type: nodejs
     path: gen/srv
     parameters:
@@ -22,10 +22,10 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: devops2-logging
+      - name: devops-logging
 
 resources:
-  - name: devops2-logging
+  - name: devops-logging
     type: org.cloudfoundry.managed-service
     parameters:
       service: application-logs
