@@ -12,8 +12,6 @@ build-parameters:
       commands:
         - npm install --production
         - npx -p @sap/cds-dk cds build --production
-        - npm install --passport
-        - npx -p @sap/cds-dk cds build --passport
 
 modules:
   - name: devops-srv
