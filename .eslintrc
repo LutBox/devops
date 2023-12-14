@@ -1,10 +1,6 @@
 {
-  "extends": [
-    "plugin:@sap/cds/recommended",
-    "eslint:recommended"
-  ],
+  "extends": "eslint:recommended",
   "env": {
-    "browser": true,
     "es2022": true,
     "node": true,
     "jest": true,
@@ -20,12 +16,11 @@
     "DROP": true,
     "CDL": true,
     "CQL": true,
+    "CXL": true,
     "cds": true
   },
   "rules": {
     "no-console": "off",
-    "require-atomic-updates": "off",
-        "require-await":"warn",
-        "no-unused-vars": ["warn", { "argsIgnorePattern": "_" }]
+    "require-atomic-updates": "off"
   }
 }

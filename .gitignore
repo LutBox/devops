@@ -1,25 +1,34 @@
-.gen/
-_out/
-dist/
-edmx/
+# CAP devops
+_out
+*.db
+*.sqlite
+connection.properties
+default-*.json
+.cdsrc-private.json
 gen/
-mta_archives/
 node_modules/
 target/
 
-.DS_Store
-*.log
+# Web IDE, App Studio
+.che/
+.gen/
+
+# MTA
+*_mta_build_tmp
 *.mtar
-connection.properties
-default-env.json
-.cdsrc-private.json
-packages/messageBox
-reviews/msg-box
-reviews/db/test.db
+mta_archives/
 
-*.openapi3.json
-*.sqlite
-*.db
+# Other
+.DS_Store
+*.orig
+*.log
 
-@types/
-@cds-models/
+*.iml
+*.flattened-pom.xml
+
+# IDEs
+# .vscode
+# .idea
+
+# @cap-js/cds-typer
+@cds-models

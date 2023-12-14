@@ -4,13 +4,13 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
-		"qwtel.sqlite-viewer",
-		"sapse.vscode-cds",
+		"SAPSE.vscode-cds",
 		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
 		"mechatroner.rainbow-csv",
+		"qwtel.sqlite-viewer",
 		"humao.rest-client",
-		"sdras.night-owl",
-		"vsls-contrib.codetour"
+		"sdras.night-owl"
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [
