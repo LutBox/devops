@@ -2,21 +2,15 @@ _schema-version: '3.1'
 ID: devops
 version: 1.0.0
 description: "A simple CAP project."
-
 parameters:
   enable-parallel-deployments: true
-
 build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm install --production
-        - npx -p @sap/cds-dk cds build --production
-
+        - npx cds build --production
 modules:
-  # --------------------- SERVER MODULE ------------------------
   - name: devops-srv
-  # ------------------------------------------------------------
     type: nodejs
     path: gen/srv
     parameters:
@@ -29,11 +23,18 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: devops-auth
+      - name: devops-db
       - name: devops-logging
 
-  # ------------------ APP ROUTER MODULE -----------------------
+  - name: devops-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: devops-db
+
   - name: devops
-  # ------------------------------------------------------------
     type: approuter.nodejs
     path: app/
     parameters:
@@ -51,9 +52,7 @@ modules:
       - name: devops-logging
 
 resources:
-  # ----------------------- UAA SERVICE ------------------------
   - name: devops-auth
-  # ------------------------------------------------------------
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
@@ -62,10 +61,12 @@ resources:
       config:
         xsappname: devops-${org}-${space}
         tenant-mode: dedicated
-
-  # --------------------- LOGGING SERVICE ----------------------
+  - name: devops-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
   - name: devops-logging
-  # ------------------------------------------------------------       
     type: org.cloudfoundry.managed-service
     parameters:
       service: application-logs
