@@ -2,17 +2,13 @@ _schema-version: '3.1'
 ID: devops
 version: 1.0.0
 description: "A simple CAP project."
-
 parameters:
   enable-parallel-deployments: true
-
 build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm install --production
-        - npx -p @sap/cds-dk cds build --production
-
+        - npx cds build --production
 modules:
   - name: devops-srv
     type: nodejs
@@ -26,9 +22,36 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
+      - name: devops-auth
+      - name: devops-logging
+
+  - name: devops
+    type: approuter.nodejs
+    path: app/
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: devops-auth
       - name: devops-logging
 
 resources:
+  - name: devops-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: devops-${org}-${space}
+        tenant-mode: dedicated
   - name: devops-logging
     type: org.cloudfoundry.managed-service
     parameters:
