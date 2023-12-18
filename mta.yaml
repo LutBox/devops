@@ -14,9 +14,7 @@ build-parameters:
         - npx -p @sap/cds-dk cds build --production
 
 modules:
-  # --------------------- SERVER MODULE ------------------------
   - name: devops-srv
-  # ------------------------------------------------------------
     type: nodejs
     path: gen/srv
     parameters:
@@ -28,44 +26,10 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: devops-auth
-      - name: devops-logging
-
-  # ------------------ APP ROUTER MODULE -----------------------
-  - name: devops
-  # ------------------------------------------------------------
-    type: approuter.nodejs
-    path: app/
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
-      - name: devops-auth
       - name: devops-logging
 
 resources:
-  # ----------------------- UAA SERVICE ------------------------
-  - name: devops-auth
-  # ------------------------------------------------------------
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: devops-${org}-${space}
-        tenant-mode: dedicated
-
-  # --------------------- LOGGING SERVICE ----------------------
   - name: devops-logging
-  # ------------------------------------------------------------       
     type: org.cloudfoundry.managed-service
     parameters:
       service: application-logs
