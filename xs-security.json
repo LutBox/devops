@@ -26,14 +26,14 @@
       }
       ,
       {
-          "name": "Viewer",
+          "name": "Devops_Viewer",
           "description": "Viewer",
           "scope-references": [
               "$XSAPPNAME.Viewer"
           ]
       },
       {
-          "name": "Admin",
+          "name": "Devops_Admin",
           "description": "Administrator",
           "scope-references": [
               "$XSAPPNAME.Admin"
@@ -43,14 +43,14 @@
   ,
   "role-collections": [
       {
-          "name": "app_Viewer",
+          "name": "Devops_app_Viewer",
           "description": "Viewing access",
           "role-template-references": [
               "$XSAPPNAME.Viewer"
           ]
       },
       {
-          "name": "app_Administrator",
+          "name": "Devops_app_Administrator",
           "description": "Administrative access",
           "role-template-references": [
               "$XSAPPNAME.Admin"
