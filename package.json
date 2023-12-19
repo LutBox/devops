@@ -9,8 +9,7 @@
     "@sap/cds": "^7",
     "express": "^4",
     "@sap/xssec": "^3",
-    "passport": "^0",
-    "@sap/cds-hana": "^2"
+    "passport": "^0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
@@ -21,8 +20,7 @@
   },
   "cds": {
     "requires": {
-      "auth": "xsuaa",
-      "db": "hana"
+      "auth": "xsuaa"
     },
     "features": {
       "kibana_formatter": true
