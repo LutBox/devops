@@ -11,6 +11,9 @@
     "@sap/xssec": "^3",
     "passport": "^0"
   },
+  "engine": {
+    "node": "^12 || ^14"
+  },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^7"
@@ -27,3 +30,4 @@
     }
   }
 }
+
